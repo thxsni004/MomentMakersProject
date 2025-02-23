@@ -1,0 +1,80 @@
+/* Animated background for Logout page */
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.hindubridepack {
+    background: linear-gradient(-45deg, #e7bcbc, #f3d1d1, #f8e4e4, #ffe4e1);
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .hindubridepack h1,
+  .hindubridepack h2,
+  .hindubridepack p {
+    text-align: center;
+    color: #333;
+  }
+  
+  .hindubridepack .card {
+    border: 1px solid #ddd;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .hindubridepack .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .hindubridepack .card img {
+    width: 100%; /* Ensures the image fills the card width */
+    height: 180px; /* Keeps the image height consistent across devices */
+    object-fit: cover; /* Ensures the image is cropped to fit the dimensions */
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .hindubridepack .card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .hindubridepack .btn-primary {
+    background-color: #007bff;
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .hindubridepack .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  .hindubridepack .form-control {
+    margin: 10px auto;
+    max-width: 200px;
+    text-align: center;
+  }
+
+  /* Responsive design for small screens */
+  @media (max-width: 576px) {
+    .hindubridepack h1,
+    .hindubridepack h2 {
+      font-size: 18px;
+    }
+  
+    .hindubridepack p {
+      font-size: 14px;
+    }
+  
+    .hindubridepack .btn-primary {
+      font-size: 14px;
+      padding: 8px 10px;
+    }
+  
+    /* Maintain the original image size on small screens */
+    .hindubridepack .card img {
+      height: 180px; /* Keep the same height across all screen sizes */
+    }
+  }
+  

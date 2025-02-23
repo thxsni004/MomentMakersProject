@@ -1,0 +1,98 @@
+/* Base Styling for the About Us Page */
+.about-us-container {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background */
+  }
+  
+  /* Responsive Heading Styles */
+  .about-us-container #head {
+    font-size: 2rem; /* Default size */
+    font-weight: bold;
+    color: #2c3e50; /* Deep blue-gray */
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  @media (max-width: 992px) {
+    .about-us-container #head {
+      font-size: 1.8rem; /* Slightly smaller for tablets */
+      text-align: center; /* Center-align for smaller screens */
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .about-us-container #head {
+      font-size: 1.5rem; /* Smaller for mobile */
+      margin-bottom: 10px;
+    }
+  }
+  
+ 
+  
+  @media (max-width: 992px) {
+    .about-us-container #par {
+      font-size: 0.95rem; /* Reduce font size slightly for tablets */
+      text-align: center; /* Center-align for smaller screens */
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .about-us-container #par {
+      font-size: 0.85rem; /* Smaller font size for mobile */
+    }
+  }
+  
+  /* Image Responsiveness */
+  .about-us-container img {
+    width: 100%; /* Make images fully responsive */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Rounded corners for a modern look */
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  /* Section Styling */
+  .work-with-us-section {
+    display: flex;
+    flex-wrap: wrap; /* Ensure responsiveness by wrapping items */
+    gap: 20px; /* Add space between items */
+    background-color: #ffffff; /* White background for contrast */
+    border-radius: 15px; /* Rounded corners for sections */
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  .work-with-us-section .left-side,
+  .work-with-us-section .right-side {
+    flex: 1; /* Allow sections to share equal space */
+  }
+  
+  @media (max-width: 768px) {
+    .work-with-us-section {
+      flex-direction: column; /* Stack items vertically on smaller screens */
+      padding: 20px;
+    }
+  
+    .work-with-us-section .left-side,
+    .work-with-us-section .right-side {
+      flex: unset; /* Remove equal space on smaller screens */
+    }
+  }
+  
+  /* Carousel Styling */
+  .carousel-container .carousel-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); /* Add text shadow for better readability */
+  }
+  
+  .carousel-container .carousel-text {
+    font-size: 1.2rem;
+    color: #f1f1f1;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Add text shadow for better readability */
+  }
+  

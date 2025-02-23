@@ -1,0 +1,111 @@
+/* Services.css */
+
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .logo {
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .brand-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #131212;
+  }
+  
+  /* Carousel Styling */
+  .carousel-container {
+    margin-bottom: 00px;
+  }
+  .carousel-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+  }
+  .carousel-text {
+    font-size: 1.2rem;
+    color: #eee;
+  }
+  
+  /* Services Section */
+  .services-section {
+    
+    background-color: #f8f9fa;
+    padding: 40px 0;
+  }
+  .services-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+  }
+  
+  .service-item {
+    padding: 20px;
+    border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .service-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .service-animation {
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .service-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s;
+  }
+  .service-image:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Specific Service Animations */
+  .stage-decoration {
+    animation: fadeIn 2s;
+  }
+  .luxury-car {
+    animation: slideInLeft 2s;
+  }
+  .birthday-party {
+    animation: slideInRight 2s;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  

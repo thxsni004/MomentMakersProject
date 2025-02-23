@@ -1,0 +1,170 @@
+/* Animated background for Logout page */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.Shading {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(-45deg, #da85dd, #b26bce, #a2d3eb, #7ee7fa);
+    background-size: 400% 400%;
+    animation: gradientAnimation 10s ease infinite;
+    overflow: scroll;
+    
+    
+}
+.Shadeone {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+    background: linear-gradient(-45deg, #f0d8ba, #f3bac4, #f5c8af, #eeb4ab);
+
+    background-size: 400% 400%;
+    animation: gradientAnimation 10s ease infinite;
+     overflow: scroll;
+    
+}
+
+/* colorShadingAnimation
+1️⃣ Elegant Sunset (Soft & Warm)
+background: linear-gradient(-45deg, #ffcf96, #ffafbd, #ffc3a0, #ff9a8b);
+
+2️⃣ Luxury Gold & Cream (Rich & Sophisticated)
+background: linear-gradient(-45deg, #f3eacb, #e6c790, #d1a76e, #b6895a);
+
+3️⃣ Blush & Champagne (Soft & Feminine)
+background: linear-gradient(-45deg, #fddbb8, #fbc2eb, #fae1dd, #e4c1f9);
+
+4️⃣ Earthy Tones (Natural & Warm)
+background: linear-gradient(-45deg, #d8a47f, #b08465, #8f5e4d, #6b4226);
+
+
+5️⃣ Rose Gold Aesthetic (Trendy & Modern)
+background: linear-gradient(-45deg, #e7bcbc, #f3d1d1, #f8e4e4, #ffe4e1);
+
+*/
+
+.ShadeTwo{
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+   overflow: scroll;
+   height: 100vh;
+   display: flex;
+    background: linear-gradient(-45deg, #fddbb8, #fbc2eb, #fae1dd, #e4c1f9);
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+
+}
+/* Table container */
+.table-container {
+  padding: 20px;
+}
+
+/* Header */
+.orders-header {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff6a88;
+}
+
+/* Table */
+.orders-table {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Header */
+.table-header {
+  background: linear-gradient(45deg, #ff9a8b, #ff6a88);
+  color: white;
+  text-transform: uppercase;
+}
+
+/* Table Body */
+.table-body tr:nth-child(even) {
+  background: #f8f8f8;
+}
+
+.table-body tr:hover {
+  background: #ffe6e6;
+  transition: 0.3s;
+}
+
+/* No orders message */
+.no-orders {
+  font-size: 18px;
+  font-weight: bold;
+  color: #666;
+  padding: 20px;
+}
+
+
+
+.h1 {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(17, 16, 16);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+    
+}
+
+/* Styling for curved buttons with gradient */
+.custom-button {
+    border-radius: 25px; /* Makes the button curved */
+    background: linear-gradient(45deg, purple, pink); /* Gradient color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Add some padding for a better look */
+    font-weight: bold; /* Make the text bold */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Add smooth hover effects */
+    margin-right: 15px; /* Add space between buttons */
+  }
+    /* Ensure the last button doesn't have extra margin */
+    .custom-button:last-child {
+        margin-right: 0;
+      }
+        /* Hover effect */
+  .custom-button:hover {
+    transform: scale(1.05); /* Slightly enlarge the button */
+    box-shadow: 0px 4px 10px rgba(102, 18, 64, 0.2); /* Add shadow on hover */
+  }
+  .red-button{
+    border-radius: 25px; /* Makes the button curved */
+    background: linear-gradient(45deg, rgb(128, 0, 6), rgb(190, 124, 135)); /* Gradient color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Add some padding for a better look */
+    font-weight: bold; /* Make the text bold */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Add smooth hover effects */
+    margin-right: 15px; /* Add space between buttons */
+  }
+
+  
+  /* Ensure the last button doesn't have extra margin */
+  .red-button:last-child {
+    margin-right: 0;
+  }
+  
+  /* Hover effect */
+  .red-button:hover {
+    transform: scale(1.05); /* Slightly enlarge the button */
+    box-shadow: 0px 4px 10px rgba(102, 18, 64, 0.2); /* Add shadow on hover */
+  }
+
+  
+  
