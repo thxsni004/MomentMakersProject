@@ -39,6 +39,9 @@ import Adminlogin from './Adminlogin';
 import Logout from './Logout';
 import CartPage from './CartPage';
 import ViewHistory from './ViewHistory';
+import OtherEvent from "./OtherEvent";
+import AdminStagePrograms from "./AdminStagePrograms";
+import BookingDetails from "./BookingDetails";
 
 
 
@@ -64,7 +67,7 @@ function App() {
  <Route path="/muslim" element={<Muslim />} />
  <Route path="/chrstian" element={<Christian />} />
  <Route path="/hindu" element={<Hindu />} />
- <Route path="/dest" element={<Destination />} />
+ {/* <Route path="/dest" element={<Destination />} /> */}
  <Route path="/bridepack" element={<Hindubridepack />} />
  <Route path="/groompack" element={<Hindugroompack />} />
  <Route path="/mbride" element={<Muslimbridepack />} />
@@ -72,6 +75,8 @@ function App() {
  <Route path="/cbride" element={<Christianbride />} />
  <Route path="/cgroom" element={<Christiangroom />} />
  <Route path="/service" element={<Services />} />
+ <Route path='/other' element={<OtherEvent/>}/>
+ <Route path='/adstageprg' element={<AdminStagePrograms/>}/>
 
  <Route path="/admin" element={<AdminPanel />} />
  <Route path="/stagelist" element={<AdminStage />} />
@@ -89,9 +94,11 @@ function App() {
  <Route path="/orders/christiangroom" element={<ChristianGroomOrder />} />
  <Route path="/orders/muslimbride" element={<MuslimBrideOrder />} />
  <Route path="/orders/muslimgroom" element={<MuslimGroomOrder />} />
- <Route path="/orders/destination" element={<DestinationOrder />} />
+ {/* <Route path="/orders/destination" element={<DestinationOrder />} /> */}
 
 <Route path='/adminlogin' element={<Adminlogin/>}/>
+
+<Route path='/book' element={<BookingDetails/>}/>
 
 <Route path='/cart' element={<CartPage/>}/>
 <Route path='/ViewHistory' element={<ViewHistory/>}/>

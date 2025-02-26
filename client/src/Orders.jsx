@@ -8,13 +8,13 @@ function Orders() {
   const navigate = useNavigate();
 
   const categories = [
-    { name: "Hindu Bride", path: "/orders/hindubride", color: "#ffccd5" },
+    { name: "Hindu Bride", path: "/orders/hindubride", color: "#6a0572" },
     { name: "Hindu Groom", path: "/orders/hindugroom", color: "#ff9f1c" },
     { name: "Muslim Bride", path: "/orders/muslimbride", color: "#a0c4ff" },
     { name: "Muslim Groom", path: "/orders/muslimgroom", color: "#00a896" },
     { name: "Christian Bride", path: "/orders/christianbride", color: "#f4a261" },
     { name: "Christian Groom", path: "/orders/christiangroom", color: "#e76f51" },
-    { name: "Destination", path: "/orders/destination", color: "#6a0572" },
+    // { name: "Destination", path: "/orders/destination", color: "#6a0572" },
   ];
 
 

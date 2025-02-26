@@ -38,11 +38,18 @@ function Home() {
       text: "Celebrate the sacred bond of love with a traditional Christian wedding.",
       link: "/chrstian",
     },
+    // {
+    //   image: "images/img18.jpg",
+    //   title: "Destination Wedding",
+    //   text: "Celebrate the sacred bond of love with a traditional weddings in destination..",
+    //   link: "/dest",
+    // },
+
     {
-      image: "images/img18.jpg",
-      title: "Destination Wedding",
-      text: "Celebrate the sacred bond of love with a traditional weddings in destination..",
-      link: "/dest",
+     image: "images/stageshow.jpg",
+      title: "🌟Stage Shows🌟 ",
+      text: "🎆 Entertainment Redefined - Book Your Favorite Show Now!",
+      link: "/other",
     },
   ]
  

@@ -44,12 +44,15 @@ const cardStyle = {
 
 const adminLinks = [
   { path: '/order', border: 'warning', header: 'Orders', title: 'View Orders' },
+  {path:'/book', border:'dark',header:'Orders',title:'View Card Booking '},
   { path: '/admin', border: 'primary', header: 'ADD', title: 'Add Fields' },
+  {path:'/adstageprg',border:'info',header:'ADD ',title:'Add Stage Shows '},
   { path: '/stagelist', border: 'secondary', header: 'Stages', title: 'Edit and Delete Stages' },
   { path: '/addlist', border: 'success', header: 'AddOptions', title: 'Edit and Delete AddOptions' },
   { path: '/packlist', border: 'danger', header: 'Packages', title: 'Edit and Delete Packages' },
   { path: '/setting', border: 'info', header: 'Settings', title: 'Edit and Delete Settings' },
   { path: '/camera', border: 'dark', header: 'Camera', title: 'Edit and Delete Camera' },
+ 
 ];
 
 

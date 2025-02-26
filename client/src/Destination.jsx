@@ -3,13 +3,17 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
+
 
 function Destination() {
-  const [selectedStage, setSelectedStage] = useState([]);
+     const [selectedStage, setSelectedStage] = useState(() => {
+         return JSON.parse(sessionStorage.getItem("selectedStage")) || null;
+       });
       const [selectedCameraPackage, setSelectedCameraPackage] = useState(null);
-
-      
+const[user,setselecteduser]=useState(()=>{
+  return JSON.parse(sessionStorage.getItem("user"))||null;
+})
+       
      
   
   

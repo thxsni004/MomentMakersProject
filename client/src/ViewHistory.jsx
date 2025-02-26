@@ -15,39 +15,99 @@ const ViewHistory = () => {
 });
 
 
-
 useEffect(() => {
-  const storedHistory = JSON.parse(sessionStorage.getItem("orderHistory")) || [];
   if (user) {
-      // Filter orders to show only the logged-in user's history
+      const storedHistory = JSON.parse(sessionStorage.getItem("orderHistory")) || [];
       const userOrders = storedHistory.filter(order => order.userid === user.email);
-      setOrderHistory(userOrders);
+
+      const storedBookings = JSON.parse(sessionStorage.getItem("stageBookings")) || [];
+      const userBookings = storedBookings.filter(booking => booking.userid === user.email);
+
+      setOrderHistory([...userOrders, ...userBookings]); // Merge both histories
   }
 }, [user]);
 
+const handleBook = async () => {
+  const userDetails = JSON.parse(sessionStorage.getItem("user")); 
+
+  if (!selectedProgram || !userDetails) {
+      alert("User details not found. Please log in.");
+      return;
+  }
+  try {
+    const response = await fetch(
+        `http://localhost:3001/book-stage-program/${selectedProgram._id}`, 
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                userId: userDetails.email, // Use email for identification
+                vipBooking: vipBooking,
+            }),
+        }
+    );
+
+    const data = await response.json();
+    if (response.ok) {
+        alert("Booking confirmed!");
+  // Retrieve existing bookings or initialize an empty array
+  const existingBookings = JSON.parse(sessionStorage.getItem("stageBookings")) || [];
+
+  // Save the new booking
+  const newBooking = {
+      userid: userDetails.email,
+      programName: selectedProgram.name,
+      date: selectedProgram.date,
+      price: vipBooking ? selectedProgram.price + 500 : selectedProgram.price,
+      vip: vipBooking ? "Yes" : "No"
+  };
+  sessionStorage.setItem("stageBookings", JSON.stringify([...existingBookings, newBooking]));
+
+  setShowModal(false);
+} else {
+  alert(data.error || "Booking failed. Please try again.");
+}
+} catch (error) {
+console.error("Booking failed:", error);
+}
+};
   return (
     <div className="p-4 max-w-4xl mx-auto text-black">
       <h1 className="text-3xl font-bold mb-6 text-center">Your order History</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 " >
       {orderHistory.length > 0 ? (
-        orderHistory.map((order, index) => (
-          <Card key={index} style={{ marginBottom: "20px", padding: "10px" }}>
+    orderHistory.map((order, index) => (
+        <Card key={index} style={{ marginBottom: "20px", padding: "10px" }}>
             <Card.Body>
-              <Card.Title>Order #{index + 1}</Card.Title>
-              <Card.Text><strong>Date:</strong> {order.date}</Card.Text>
-              <Card.Text><strong>Package:</strong> {order.packagetype}</Card.Text>
-              <Card.Text><strong>Stage:</strong> {order.stageOption?.price || "Not Selected"}</Card.Text>
-              <Card.Text><strong>Camera:</strong> {order.cameraPackage?.price || "Not Selected"}</Card.Text>
-              <Card.Text><strong>Setting:</strong> {order.settingOption?.price || "Not Selected"}</Card.Text>
-              <Card.Text><strong>Add-Ons:</strong> {Array.isArray(order.addOptions) ? order.addOptions.join(", ") : "None"}</Card.Text>
-              <Card.Text><strong>People Count:</strong> {order.numberOfPeople}</Card.Text>
-              <Card.Text><strong>Total Cost:</strong> ₹{order.totalCost}</Card.Text>
+                <Card.Title>Order #{index + 1}</Card.Title>
+                <Card.Text><strong>Date:</strong> {order.date}</Card.Text>
+
+                {order.programName ? (
+                    // Stage Show Booking Details
+                    <>
+                        <Card.Text><strong>Program:</strong> {order.programName}</Card.Text>
+                        <Card.Text><strong>VIP:</strong> {order.vip}</Card.Text>
+                        <Card.Text><strong>Price:</strong> ₹{order.price}</Card.Text>
+                    </>
+                ) : (
+                    // Wedding Event Booking Details
+                    <>
+                        <Card.Text><strong>Package:</strong> {order.packagetype}</Card.Text>
+                        <Card.Text><strong>Stage:</strong> {order.stageOption?.price || "Not Selected"}</Card.Text>
+                        <Card.Text><strong>Camera:</strong> {order.cameraPackage?.price || "Not Selected"}</Card.Text>
+                        <Card.Text><strong>Setting:</strong> {order.settingOption?.price || "Not Selected"}</Card.Text>
+                        <Card.Text><strong>Add-Ons:</strong> {Array.isArray(order.addOptions) ? order.addOptions.join(", ") : "None"}</Card.Text>
+                        <Card.Text><strong>People Count:</strong> {order.numberOfPeople}</Card.Text>
+                        <Card.Text><strong>Total Cost:</strong> ₹{order.totalCost}</Card.Text>
+                    </>
+                )}
             </Card.Body>
-          </Card>
-        ))
-      ) : (
-        <p>No order history available.</p>
-      )}
+        </Card>
+    ))
+) : (
+    <p>No booking history available.</p>
+)}
+
 
       <center><Button variant="danger" onClick={() => {
         sessionStorage.removeItem("orderHistory");
@@ -66,69 +126,3 @@ export default ViewHistory;
 
 
 
-
-
-//////////////
-// import React, { useEffect, useState } from 'react';
-// import Table from 'react-bootstrap/Table';
-// import { useNavigate } from "react-router-dom";
-
-// function ViewHistory() {
-//     const navigate = useNavigate();
-//     const [orderHistory, setOrderHistory] = useState([]);
-//     const [user, setUser] = useState(() => {
-//         return JSON.parse(sessionStorage.getItem("user")) || null;
-//     });
-
-//     useEffect(() => {
-//         const storedHistory = JSON.parse(sessionStorage.getItem("orderHistory")) || [];
-//         if (user) {
-//             // Filter orders to show only the logged-in user's history
-//             const userOrders = storedHistory.filter(order => order.userid === user.email);
-//             setOrderHistory(userOrders);
-//         }
-//     }, [user]);
-
-//     return (
-//         <div>
-//             <h2>Your Order History</h2>
-//             {orderHistory.length > 0 ? (
-//                 <Table striped bordered hover>
-//                     <thead>
-//                         <tr>
-//                             <th>#</th>
-//                             <th>Package Type</th>
-//                             <th>Additional Options</th>
-//                             <th>Stage</th>
-//                             <th>Camera Package</th>
-//                             <th>Setting</th>
-//                             <th>People</th>
-//                             <th>Total Cost</th>
-//                             <th>Date</th>
-//                         </tr>
-//                     </thead>
-//                     <tbody>
-//                         {orderHistory.map((order, index) => (
-//                             <tr key={index}>
-//                                 <td>{index + 1}</td>
-//                                 <td>{order.packagetype}</td>
-//                                 <td>{order.addOptions.join(", ")}</td>
-//                                 <td>{order.stageOption?.price || "N/A"}</td>
-//                                 <td>{order.cameraPackage?.price || "N/A"}</td>
-//                                 <td>{order.settingOption?.price || "N/A"}</td>
-//                                 <td>{order.numberOfPeople}</td>
-//                                 <td>₹{order.totalCost}</td>
-//                                 <td>{order.date}</td>
-//                             </tr>
-//                         ))}
-//                     </tbody>
-//                 </Table>
-//             ) : (
-//                 <p>No order history found.</p>
-//             )}
-//             <button onClick={() => navigate("/")}>Back to Home</button>
-//         </div>
-//     );
-// }
-
-// export default ViewHistory;

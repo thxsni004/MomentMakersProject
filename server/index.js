@@ -17,6 +17,8 @@ const christianbridepack=require('./models/christianbride');
 const christiangroompack=require('./models/christiangroom');
 const destination=require('./models/destination');
 const Order=require('./models/Order.js')
+const StageProgram=require('./models/StageProgram.js')
+const Booking=require('./models/Booking.js')
 
 const upload = require('./uploads'); // Import the multer config
 const { MuslimBride, MuslimGroom, HinduBride, HinduGroom, ChristianBride, ChristianGroom,StageOption,AddOption, PackageOption,SettingOptions,CameraOptions } = require('./models/adminpack');
@@ -413,6 +415,110 @@ app.post('/admin', upload.single('image'), async (req, res) => {
     res.status(201).json({ message: 'Item added successfully' });
   } catch (error) {
     res.status(500).json({ error: 'Error adding item' });
+  }
+});
+
+
+// Add Stage Program
+app.post("/admin/stage-programs", upload.single("image"), async (req, res) => {
+  try {
+    const { name, date, price } = req.body;
+    const image = req.file.filename;
+
+    const newProgram = new StageProgram({ name, date, price, image });
+    await newProgram.save();
+    res.status(201).json({ message: "Program added successfully!" });
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+
+// Get All Stage Programs
+app.get("/stage-programs", async (req, res) => {
+  const programs = await StageProgram.find();
+  res.json(programs);
+});
+
+
+
+// Update Stage Program
+app.put("/admin/stage-programs/:id", upload.single("image"), async (req, res) => {
+  try {
+    const { name, date, price } = req.body;
+    let updateData = { name, date, price };
+
+    if (req.file) {
+      updateData.image = req.file.filename;
+    }
+
+    await StageProgram.findByIdAndUpdate(req.params.id, updateData);
+    res.json({ message: "Program updated successfully!" });
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+
+// Delete Stage Program
+app.delete("/admin/stage-programs/:id", async (req, res) => {
+  await StageProgram.findByIdAndDelete(req.params.id);
+  res.json({ message: "Program deleted!" });
+});
+
+// (a) Book a Stage Program (Generate Participation Card)
+// POST - Book a stage program
+app.post("/book-stage-program/:id", async (req, res) => {
+  try {
+    const { userId, vipBooking } = req.body;
+    const programId = req.params.id;
+
+    if (!userId || !programId) {
+      return res.status(400).json({ error: "Missing userId or programId" });
+    }
+
+    console.log("Fetching user:", userId);
+    const user = await EmpireModel.findById(userId);
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    console.log("Fetching stage program:", programId);
+    const stageProgram = await StageProgram.findById(programId);
+    if (!stageProgram) return res.status(404).json({ error: "Stage program not found" });
+
+    // Booking logic
+    const totalAmount = vipBooking ? stageProgram.price + 500 : stageProgram.price;
+    const newBooking = new Booking({
+      userid: user.email,
+      username: user.name,
+      userphone: user.phone,
+      programId: stageProgram._id,
+      programName: stageProgram.name,
+      date: stageProgram.date,
+      price: stageProgram.price,
+      vipBooking,
+      totalAmount,
+      participationCard: `PART-${Date.now()}`,
+      vipCard: vipBooking ? `VIP-${Date.now()}` : null,
+    });
+
+    await newBooking.save();
+    res.status(201).json({ message: "Booking successful", booking: newBooking });
+  } catch (error) {
+    console.error("Error booking stage program:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
+// (b) Fetch User's Bookings
+
+app.get("/bookings", async (req, res) => {
+  try {
+    const bookings = await Booking.find(); // Fetch all bookings from MongoDB
+    res.json(bookings);
+  } catch (error) {
+    console.error("Error fetching bookings:", error);
+    res.status(500).json({ error: "Failed to fetch bookings" });
   }
 });
 
@@ -945,6 +1051,9 @@ app.get("/api/success-events", async (req, res) => {
     res.status(500).json({ message: "Error fetching files", error });
   }
 });
+
+
+
 
 
 app.listen(3001, () => {
