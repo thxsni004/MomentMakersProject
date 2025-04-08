@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -5,7 +6,8 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const MongoStore = require("connect-mongo");
 const Razorpay = require("razorpay");
-
+const path = require("path");
+const multer = require("multer");
 
 const EmpireModel = require('./models/empire');
 const Adminmodel=require('./models/adminlogin');
@@ -22,8 +24,8 @@ const Booking=require('./models/Booking.js')
 
 const upload = require('./uploads'); // Import the multer config
 const { MuslimBride, MuslimGroom, HinduBride, HinduGroom, ChristianBride, ChristianGroom,StageOption,AddOption, PackageOption,SettingOptions,CameraOptions } = require('./models/adminpack');
-const multer = require("multer");
-const path = require("path");
+// const multer = require("multer");
+// const path = require("path");
 
 const razorpay = new Razorpay({
   key_id: 'rzp_test_ij6Cc2ZnU6RAhZ',
@@ -31,39 +33,47 @@ const razorpay = new Razorpay({
   
 });
 
-
+// Express app
 const app = express();
+const PORT = process.env.PORT || 3001;
+
+
+// Middleware
 app.use(express.json());
-app.use(express.static('uploads')); // Serve uploaded images
-app.use(
-  cors({
-    origin: "http://localhost:5173", // Your frontend URL
-    credentials: true, // Allow credentials (sessions, cookies)
-  })
-);
-// Serve uploads folder statically
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
-
-app.use(
-  session({
-    secret: "your-secret-key", // Change this to a secure key
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: "mongodb://localhost:27017/moment", collectionName: "sessions" }), // Store sessions in MongoDB
-    cookie: {maxAge:30000, secure: false, httpOnly: true, sameSite: "lax", }, // For HTTPS, change `secure: true`
-  })
-);
-
-
 app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  credentials: true,
+}));
 
-mongoose.connect('mongodb://localhost:27017/moment', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-mongoose.connection.on('error', (err) => {
-  console.error('MongoDB connection error:', err);
+// Session setup
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URI,
+    collectionName: 'sessions',
+  }),
+  cookie: {
+    maxAge: 30000,
+    secure: false, // true if using https
+    httpOnly: true,
+    sameSite: 'lax',
+  },
+}));
+
+
+
+// MongoDB Connection
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('MongoDB Connected'))
+  .catch((err) => console.error('MongoDB connection error:', err));
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
 
 
@@ -1056,6 +1066,8 @@ app.get("/api/success-events", async (req, res) => {
 
 
 
-app.listen(3001, () => {
-  console.log('Server is running on port 3001');
-});
+// const PORT = process.env.PORT || 3001;
+
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}`);
+// });
