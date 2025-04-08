@@ -981,13 +981,12 @@ app.put("/admin/cameras/:id", async (req, res) => {
   }
 });
 
-
 app.post('/upload', upload.single('image'), (req, res) => {
-  console.log(req.file);  // Debugging
-  if (!req.file) {
+  console.log(req.file);  // Cloudinary response
+  if (!req.file || !req.file.path) {
     return res.status(400).json({ message: "No file uploaded" });
   }
-  res.json({ imageUrl: `/uploads/${req.file.filename}` });
+  res.json({ imageUrl: req.file.path });  // This is the Cloudinary URL
 });
 
 
