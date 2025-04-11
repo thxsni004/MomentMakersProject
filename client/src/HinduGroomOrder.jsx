@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Table, Container } from "react-bootstrap";
-import './main.css'
+
 
 function HinduGroomOrder() {
       const [orders, setOrders] = useState([]); 

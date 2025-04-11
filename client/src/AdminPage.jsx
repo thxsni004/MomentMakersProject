@@ -3,7 +3,7 @@ import { Card, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './AdminPage.css'; // Import external CSS
 import "bootstrap/dist/css/bootstrap.min.css";
-import './main.css';
+
 
 function AdminPage() {
   return (
