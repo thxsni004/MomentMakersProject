@@ -7,7 +7,7 @@ function MuslimGroomOrder() {
                  useEffect(() => {
                       const fetchOrders = async () => {
                         try {
-                          const response = await fetch("http://localhost:3001/order/muslimgroom");
+                          const response = await fetch(`${import.meta.env.VITE_API_URL}/order/muslimgroom`);
                           const data = await response.json();
                           setOrders(data);
                         } catch (error) {

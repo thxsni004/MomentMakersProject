@@ -7,7 +7,7 @@ function ChristianBrideOrder() {
                   useEffect(() => {
                        const fetchOrders = async () => {
                          try {
-                           const response = await fetch("http://localhost:3001/order/christianbride");
+                           const response = await fetch(`${import.meta.env.VITE_API_URL}/order/christianbride`);
                            const data = await response.json();
                            setOrders(data);
                          } catch (error) {

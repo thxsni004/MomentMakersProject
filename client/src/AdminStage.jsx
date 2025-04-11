@@ -13,7 +13,7 @@ const AdminStage = () => {
     // Fetch the stage options from the server
     const fetchStages = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/admin/stages");
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/admin/stages`);
         setStages(response.data); // Save the fetched data to state
         setLoading(false);
       } catch (error) {
@@ -27,7 +27,7 @@ const AdminStage = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3001/admin/stages/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/admin/stages/${id}`);
       // Remove the deleted stage from the state
       setStages(stages.filter(stage => stage._id !== id));
     } catch (error) {
@@ -39,7 +39,7 @@ const AdminStage = () => {
     if (!newPrice) return;
   
     try {
-      const { data } = await axios.put(`http://localhost:3001/admin/stages/${id}`, {
+      const { data } = await axios.put(`${import.meta.env.VITE_API_URL}/admin/stages/${id}`, {
         price: newPrice,
       });
   
@@ -92,16 +92,10 @@ const AdminStage = () => {
 
           
 
-            {/* {stage.image && (
-              <img
-                src={`http://localhost:3001/uploads/${stage.image}`}
-                alt={stage.name}
-                className="w-full h-auto rounded mt-4"
-              />
-            )} */}
+           
            {stage.image && (
   <img
-    src={`http://localhost:3001${stage.image}`}  // Ensure correct URL
+    src={`${import.meta.env.VITE_API_URL}${stage.image}`}  // Ensure correct URL
     alt={stage.name}
     className="w-full h-auto rounded mt-4"
     onError={(e) => { e.target.src = "/fallback-image.jpg"; }} // Fallback if image fails

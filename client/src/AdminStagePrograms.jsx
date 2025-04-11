@@ -15,7 +15,7 @@ const AdminStagePrograms = () => {
   }, []);
 
   const fetchPrograms = async () => {
-    const response = await fetch("http://localhost:3001/stage-programs");
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/stage-programs`);
     const data = await response.json();
     setPrograms(data);
   };
@@ -38,8 +38,8 @@ const AdminStagePrograms = () => {
 
     const method = editMode ? "PUT" : "POST";
     const url = editMode
-      ? `http://localhost:3001/admin/stage-programs/${editId}`
-      : "http://localhost:3001/admin/stage-programs";
+      ? `${import.meta.env.VITE_API_URL}/admin/stage-programs/${editId}`
+      : `${import.meta.env.VITE_API_URL}/admin/stage-programs`;
 
     await fetch(url, {
       method,
@@ -53,7 +53,7 @@ const AdminStagePrograms = () => {
 
   // Handle Delete
   const handleDelete = async (id) => {
-    await fetch(`http://localhost:3001/admin/stage-programs/${id}`, { method: "DELETE" });
+    await fetch(`${import.meta.env.VITE_API_URL}/admin/stage-programs/${id}`, { method: "DELETE" });
     fetchPrograms();
   };
 
@@ -75,7 +75,7 @@ const AdminStagePrograms = () => {
         {programs.map((program) => (
           <Col key={program._id} xs={1} sm={2} md={3} >
             <Card>
-              <Card.Img variant="top" src={`http://localhost:3001/uploads/${program.image}`} />
+              <Card.Img variant="top" src={`${import.meta.env.VITE_API_URL}/uploads/${program.image}`} />
               <Card.Body>
                 <Card.Title>{program.name}</Card.Title>
                 <Card.Text>Date: {program.date}</Card.Text>

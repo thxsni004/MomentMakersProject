@@ -13,7 +13,7 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/signup", { name, email, password,phone }) 
+      .post(`${import.meta.env.VITE_API_URL}/signup`, { name, email, password,phone }) 
       .then((result) => {
         alert("Signup successful");
         navigate("/login");

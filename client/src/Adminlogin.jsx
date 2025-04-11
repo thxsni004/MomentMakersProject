@@ -13,7 +13,7 @@ function Adminlogin() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/adminlogin", { email, password })
+    axios.post(`${import.meta.env.VITE_API_URL}/adminlogin`, { email, password })
       .then((result) => {
         if (result.data.message === "Login successful") {
          

@@ -12,7 +12,7 @@ function SettingList() {
             // Fetch the stage options from the server
             const fetchsettings = async () => {
               try {
-                const response = await axios.get("http://localhost:3001/admin/settings");
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/admin/settings`);
                 setsetting(response.data); // Save the fetched data to state
                 setLoading(false);
             } catch (error) {
@@ -26,7 +26,7 @@ function SettingList() {
 
           const handleDelete = async (id) => {
             try {
-              await axios.delete(`http://localhost:3001/admin/settings/${id}`);
+              await axios.delete(`${import.meta.env.VITE_API_URL}/admin/settings/${id}`);
               // Remove the deleted package from the state
               setsetting(setting.filter(set => set._id !== id));
             } catch (error) {
@@ -38,7 +38,7 @@ function SettingList() {
             if (!newPrice) return;
         
             try {
-              const updatedSettings = await axios.put(`http://localhost:3001/admin/settings/${id}`, {
+              const updatedSettings = await axios.put(`${import.meta.env.VITE_API_URL}/admin/settings/${id}`, {
                 price: newPrice,
               });
     
@@ -92,7 +92,7 @@ if (loading) return <div>Loading...</div>;
 
             {set.image && (
               <img
-              src={`http://localhost:3001${set.image}`}  // Ensure correct URL
+              src={`${import.meta.env.VITE_API_URL}${set.image}`}  // Ensure correct URL
               alt={set.name}
               className="w-full h-auto rounded mt-4"
               onError={(e) => { e.target.src = "/fallback-image.jpg"; }} // Fallback if image fails

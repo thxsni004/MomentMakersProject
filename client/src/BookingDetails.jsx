@@ -10,7 +10,7 @@ function BookingDetails() {
     useEffect(() => {
         const fetchBookings = async () => {
             try {
-                const response = await fetch("http://localhost:3001/bookings"); // Adjust API URL if needed
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/bookings`);
                 const data = await response.json();
 
                 if (!response.ok) {

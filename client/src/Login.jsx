@@ -36,7 +36,7 @@ function Login() {
 const handleSubmit = (e) => {
   e.preventDefault();
   axios
-    .post("http://localhost:3001/login", { email, password }, { withCredentials: true }) // Ensure cookies are sent
+    .post(`${import.meta.env.VITE_API_URL}/login`, { email, password }, { withCredentials: true }) // Ensure cookies are sent
     .then((result) => {
       console.log("Response from server:", result.data);
       if (result.data.message === "Login successful") {

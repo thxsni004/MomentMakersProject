@@ -13,7 +13,7 @@ function AddList() {
         // Fetch the stage options from the server
         const fetchAddOptions = async () => {
           try {
-            const response = await axios.get("http://localhost:3001/admin/Add");
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/admin/Add`);
             setadd(response.data); // Save the fetched data to state
             setLoading(false);
           } catch (error) {
@@ -28,7 +28,7 @@ function AddList() {
 
       const handleDelete = async (id) => {
         try {
-          await axios.delete(`http://localhost:3001/admin/Add/${id}`);
+          await axios.delete(`${import.meta.env.VITE_API_URL}/admin/Add/${id}`);
           // Remove the deleted stage from the state
           setadd(add.filter(adding => adding._id !== id));
         } catch (error) {
@@ -40,9 +40,10 @@ function AddList() {
         if (!newPrice) return;
     
         try {
-          const updatedAdd = await axios.put(`http://localhost:3001/admin/Add/${id}`, {
+          const updatedAdd = await axios.put(`${import.meta.env.VITE_API_URL}/admin/Add/${id}`, {
             price: newPrice,
           });
+          
     
           // Update the price in the state
           setadd(add.map(adding =>

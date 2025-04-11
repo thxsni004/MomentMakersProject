@@ -36,7 +36,7 @@ function Logout() {
 
     const handleLogout = async () => {
         try {
-            const response = await fetch("http://localhost:3001/logout", {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/logout`, {
             });            
             const data = await response.json();
             if (response.ok) {

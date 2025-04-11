@@ -36,7 +36,7 @@ const handleBook = async () => {
   }
   try {
     const response = await fetch(
-        `http://localhost:3001/book-stage-program/${selectedProgram._id}`, 
+        `${import.meta.env.VITE_API_URL}/book-stage-program/${selectedProgram._id}`, 
         {
             method: "POST",
             headers: { "Content-Type": "application/json" },

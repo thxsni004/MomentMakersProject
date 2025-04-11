@@ -42,7 +42,7 @@ const AdminPanel = () => {
     formData.append("file", file);
 
     try {
-      const response = await axios.post("http://localhost:3001/api/upload", formData, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/upload`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       alert(response.data.message);
@@ -101,7 +101,7 @@ const AdminPanel = () => {
       formData.type === "package" ? "packages" : 
       formData.type === "camera" ? "cameras" : "settings";
 
-      await axios.post(`http://localhost:3001/admin/${endpoint}`, dataToSend, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/admin/${endpoint}`, dataToSend, {
         headers: ["stage", "package", "settingoption"].includes(formData.type) 
           ? { "Content-Type": "multipart/form-data" } 
           : { "Content-Type": "application/json" },

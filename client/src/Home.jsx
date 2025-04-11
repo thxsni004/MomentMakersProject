@@ -62,7 +62,7 @@ console.log(sessionStorage.getItem("user"));
 
 
 useEffect(() => {
-  axios.get("http://localhost:3001/session", { withCredentials: true })
+  axios.get(`${import.meta.env.VITE_API_URL}/session`, { withCredentials: true })
     .then(response => {
       console.log("Session Data:", response.data);
       if (response.data.loggedIn && response.data.user) {
@@ -94,7 +94,7 @@ console.log(document.cookie);
 const handleLogout = () => {
   sessionStorage.removeItem("user");
   sessionStorage.removeItem("token");
-  axios.post("http://localhost:3001/logout", {}, { withCredentials: true }) // Inform the backend
+  axios.post(`${import.meta.env.VITE_API_URL}/logout`, {}, { withCredentials: true }) // Inform the backend
     .then(() => {
       setUser(null);
       navigate("/login");

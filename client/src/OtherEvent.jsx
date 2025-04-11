@@ -24,7 +24,7 @@ const OtherEvent = () => {
 
   const fetchPrograms = async () => {
     try {
-      const response = await fetch("http://localhost:3001/stage-programs");
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/stage-programs`);
       const data = await response.json();
       setPrograms(data);
     } catch (error) {
@@ -45,7 +45,7 @@ const handleBook = async () => {
 
     try {
       const response = await fetch(
-        `http://localhost:3001/book-stage-program/${selectedProgram._id}`, // Ensure _id is used
+        `${import.meta.env.VITE_API_URL}/book-stage-program/${selectedProgram._id}`, // Ensure _id is used
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -97,7 +97,7 @@ const handleBook = async () => {
         {programs.map((program) => (
           <Col key={program._id} xs={1} sm={2} md={3} >
             <Card>
-            <Card.Img variant="top" src={`http://localhost:3001/uploads/${program.image}`} alt={program.name} />
+            <Card.Img variant="top" src={`${import.meta.env.VITE_API_URL}/uploads/${program.image}`} alt={program.name} />
 
               <Card.Body>
                 <Card.Title>{program.name}</Card.Title>

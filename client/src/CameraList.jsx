@@ -12,7 +12,7 @@ function CameraList() {
       // Fetch the stage options from the server
       const fetchCamera = async () => {
         try {
-          const response = await axios.get("http://localhost:3001/admin/cameras");
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/admin/cameras`);
           setcamera(response.data); // Save the fetched data to state
           setLoading(false);
       } catch (error) {
@@ -26,7 +26,7 @@ function CameraList() {
 
     const handleDelete = async (id) => {
         try {
-          await axios.delete(`http://localhost:3001/admin/cameras/${id}`);
+          await axios.delete(`${import.meta.env.VITE_API_URL}/admin/cameras/${id}`);
           // Remove the deleted package from the state
           setcamera(camera.filter(cam => cam._id !== id));
         } catch (error) {
@@ -37,7 +37,7 @@ function CameraList() {
         if (!newPrice) return;
     
         try {
-          const updatedCamera = await axios.put(`http://localhost:3001/admin/cameras/${id}`, {
+          const updatedCamera = await axios.put(`${import.meta.env.VITE_API_URL}/admin/cameras/${id}`, {
             price: newPrice,
           });
  // Update the price in the state

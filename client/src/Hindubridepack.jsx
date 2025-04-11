@@ -157,7 +157,7 @@ const[user,setselecteduser]=useState(()=>{
   
       
         try {
-          const response = await fetch('http://localhost:3001/bridepack', {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/bridepack`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -225,7 +225,7 @@ const[user,setselecteduser]=useState(()=>{
     useEffect(() => {
       const fetchStages = async () => {
         try {
-          const response = await fetch('http://localhost:3001/admin/stages');
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/stages`);
           const data = await response.json();
           console.log('Stages fetched:', data);  // Log fetched stages
           setStages(data); // Update state with fetched stages
@@ -243,7 +243,7 @@ const[user,setselecteduser]=useState(()=>{
      useEffect(() => {
                              const fetchAddOptions = async () => {
                                 try {
-                                  const response = await fetch("http://localhost:3001/admin/Add"); // Correct API route
+                                  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/Add`); // Correct API route
                                   const data = await response.json();
                                   setadd(data); // Store fetched data in state
                                 } catch (error) {
@@ -260,7 +260,7 @@ const[user,setselecteduser]=useState(()=>{
     useEffect(() => {
       const fetchPackages = async () => {
         try {
-          const response = await fetch('http://localhost:3001/admin/packages');
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/packages`);
           const data = await response.json();
           console.log('packages fetched:', data);  // Log fetched packages
           setpackages(data); // Update state with fetched packages
@@ -277,7 +277,7 @@ const[user,setselecteduser]=useState(()=>{
      useEffect(() => {
       const fetchsettings = async () => {
         try {
-          const response = await fetch('http://localhost:3001/admin/settings');
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/settings`);
           const data = await response.json();
           console.log('settings fetched:', data);  // Log fetched settings
           setsetting(data); // Update state with fetched settings
@@ -295,7 +295,7 @@ const[user,setselecteduser]=useState(()=>{
      useEffect(() => {
       const fetchCamera = async () => {
         try {
-          const response = await fetch('http://localhost:3001/admin/cameras');
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/cameras`);
           const data = await response.json();
           console.log('camera fetched:', data);  // Log fetched settings
           setcamera(data); // Update state with fetched settings
@@ -327,7 +327,7 @@ const[user,setselecteduser]=useState(()=>{
     packages.map((pkg) => (
       <Col key={pkg._id}>
         <Card style={{ width: "18rem" }} className={foodPrice === pkg.price ? "blurred-card" : ""}>
-          <Card.Img variant="top" src={`http://localhost:3001${pkg.image}`} />
+          <Card.Img variant="top" src={`${import.meta.env.VITE_API_URL}${pkg.image}`} />
           <Card.Body>
             <Card.Title>{pkg.name}</Card.Title>
             <Card.Text>{pkg.description}</Card.Text>
@@ -382,7 +382,7 @@ const[user,setselecteduser]=useState(()=>{
     stages.map((stage) => (
       <Col key={stage._id}>
         <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={`http://localhost:3001${stage.image}`} alt={`${stage.name} image`} />
+        <Card.Img variant="top" src={`${import.meta.env.VITE_API_URL}${stage.image}`} alt={`${stage.name} image`} />
           <Card.Body>
             <Card.Title>{stage.name}</Card.Title>
             <Card.Text>₹{stage.price}</Card.Text>
@@ -436,7 +436,7 @@ const[user,setselecteduser]=useState(()=>{
           setting.map((set)=>(
             <Col key={set._id}>
               <Card style={{width:"18rem"}}>
-                <Card.Img variant='top' src={`http://localhost:3001${set.image}`} alt={`${set.name} image`}/>
+                <Card.Img variant='top' src={`${import.meta.env.VITE_API_URL}${set.image}`} alt={`${set.name} image`}/>
                 <Card.Body>
                   <Card.Title>{set.name}</Card.Title>
                   <Card.Text>₹{set.price}</Card.Text>

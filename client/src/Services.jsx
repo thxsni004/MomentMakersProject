@@ -18,7 +18,7 @@ function Services() {
   useEffect(() => {
     const fetchMedia = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/api/success-events");
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/success-events`);
         setMedia(response.data);
       } catch (error) {
         console.error("Error fetching media:", error);
@@ -125,10 +125,10 @@ function Services() {
         {media.map((item, index) => (
           <Carousel.Item key={index}>
             {item.type === "image" ? (
-              <img src={`http://localhost:3001${item.filePath}`} alt="Success Event" className="d-block w-100" style={{ height: "400px", objectFit: "cover" }} />
+              <img src={`${import.meta.env.VITE_API_URL}${item.filePath}`} alt="Success Event" className="d-block w-100" style={{ height: "400px", objectFit: "cover" }} />
             ) : (
               <video controls className="d-block w-100" style={{ height: "400px", objectFit: "cover" }}>
-                <source src={`http://localhost:3001${item.filePath}`} type="video/mp4" />
+                <source src={`${import.meta.env.VITE_API_URL}${item.filePath}`} type="video/mp4" />
               </video>
             )}
           </Carousel.Item>
