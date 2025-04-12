@@ -96,15 +96,24 @@ app.listen(PORT, () => {
 });
 
 
-app.get("/session", (req, res) => {
-  console.log("Session Data:", req.session);  // Debugging log
+// app.get("/session", (req, res) => {
+//   console.log("Session Data:", req.session);  // Debugging log
 
-  if (req.session.user) {
-    return res.json({ loggedIn: true, user: req.session.user });
-  }
+//   if (req.session.user) {
+//     return res.json({ loggedIn: true, user: req.session.user });
+//   }
   
-  res.json({ loggedIn: false });
+//   res.json({ loggedIn: false });
+// });
+
+app.get("/session", (req, res) => {
+  if (req.session.user) {
+    res.json({ loggedIn: true, user: req.session.user });
+  } else {
+    res.json({ loggedIn: false });
+  }
 });
+
 
 
 // Signup route

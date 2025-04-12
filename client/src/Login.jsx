@@ -10,6 +10,10 @@ function Login() {
   const navigate = useNavigate();
 
 
+
+  axios.get(`${import.meta.env.VITE_API_URL}/session`, { withCredentials: true })
+  .then(res => console.log("Session check:", res.data));
+
 // const handleSubmit = (e) => {
 //   e.preventDefault();
 //   axios
