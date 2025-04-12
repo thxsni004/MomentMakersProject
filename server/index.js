@@ -43,11 +43,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+app.set('trust proxy', 1); // ✅ Required for Render/HTTPS
+
+// app.use(cors({
+//   origin: process.env.FRONTEND_URL,
+//   credentials: true,
+// }));
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
-  credentials: true,
+  origin: 'https://frontendmomentmakersproject.onrender.com', // ✅ frontend URL
+  credentials: true, // ✅ very important
 }));
+
 
 // Session setup
 app.use(session({
