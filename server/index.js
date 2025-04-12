@@ -51,7 +51,7 @@ app.set('trust proxy', 1); // ✅ Required for Render/HTTPS
 //   credentials: true,
 // }));
 
-const cors = require("cors");
+
 
 app.use(cors({
   origin: process.env.FRONTEND_URL, // ONLY your frontend
