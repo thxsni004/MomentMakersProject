@@ -9,6 +9,7 @@ const Razorpay = require("razorpay");
 const path = require("path");
 const multer = require("multer");
 
+
 const EmpireModel = require('./models/empire');
 const Adminmodel=require('./models/adminlogin');
 const hiorder = require('./models/bridepack');
@@ -58,6 +59,7 @@ app.use(cors({
 
 // Session setup
 app.use(session({
+  name: 'moment.sid', // custom cookie name
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
