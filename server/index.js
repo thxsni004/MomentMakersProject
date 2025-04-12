@@ -51,10 +51,14 @@ app.set('trust proxy', 1); // ✅ Required for Render/HTTPS
 //   credentials: true,
 // }));
 
+const cors = require("cors");
+
 app.use(cors({
-  origin: 'https://frontendmomentmakersproject.onrender.com', // ✅ frontend URL
-  credentials: true, // ✅ very important
+  origin: process.env.FRONTEND_URL, // ONLY your frontend
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true, // This allows cookies to be sent
 }));
+
 
 
 // Session setup
