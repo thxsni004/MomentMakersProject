@@ -42,6 +42,8 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true,
@@ -57,10 +59,10 @@ app.use(session({
     collectionName: 'sessions',
   }),
   cookie: {
-    maxAge: 30000,
-    secure: false, // true if using https
+    maxAge:  24 * 60 * 60 * 1000, // 1 day
+    secure: true, // true if using https
     httpOnly: true,
-    sameSite: 'lax',
+    sameSite: 'None',
   },
 }));
 
