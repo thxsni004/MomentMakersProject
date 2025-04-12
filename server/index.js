@@ -66,6 +66,16 @@ app.use(session({
   },
 }));
 
+app.get("/testcookie", (req, res) => {
+  res.cookie("testcookie", "testvalue", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "None",
+    maxAge: 60000,
+  });
+  res.send("Test cookie set!");
+});
+
 
 
 // MongoDB Connection
