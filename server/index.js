@@ -55,7 +55,6 @@ const cors = require("cors");
 
 app.use(cors({
   origin: process.env.FRONTEND_URL, // ONLY your frontend
-  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true, // This allows cookies to be sent
 }));
 
