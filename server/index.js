@@ -59,7 +59,6 @@ app.use(cors({
 
 // Session setup
 app.use(session({
-  name: 'moment.sid', // custom cookie name
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
@@ -68,10 +67,10 @@ app.use(session({
     collectionName: 'sessions',
   }),
   cookie: {
-    maxAge:  24 * 60 * 60 * 1000, // 1 day
-    secure: true, // true if using https
+    maxAge: 24 * 60 * 60 * 1000, // 1 day
+    secure: true,                // because we're using HTTPS on render
     httpOnly: true,
-    sameSite: 'None',
+    sameSite: 'None'             // because frontend & backend are on different subdomains
   },
 }));
 
